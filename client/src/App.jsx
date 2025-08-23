@@ -1,11 +1,6 @@
 import React from "react";
-import { Button } from "./components/shadcn/button";
+import { AppRouterProvider } from "./routes/router";
 
 export default function App() {
-  return (
-    <div>
-      <h1>App</h1>
-      <Button className="bg-destructive">Click</Button>
-    </div>
-  );
+  return <AppRouterProvider />;
 }
