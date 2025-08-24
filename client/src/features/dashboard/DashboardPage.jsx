@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TemperatureCard from "./components/TemperatureCard";
-import { Card } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import {
   LightbulbIcon,
   FanIcon,
@@ -15,8 +15,22 @@ import {
   TvIcon,
   SpeakerIcon,
   RouterIcon,
+  Droplets,
+  Sun,
+  Cloud,
+  Zap,
 } from "lucide-react";
 import DeviceCard from "./components/DeviceCard";
+import { Card } from "@/components/ui/card";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 
 export default function DashboardPage() {
   const [userName] = useState("Praveen");
@@ -99,6 +113,24 @@ export default function DashboardPage() {
       initialSwitch: true,
     },
   ];
+
+  const weatherData = [
+    { icon: ThermometerSun, label: "Temperature", value: "32°C" },
+    { icon: Droplets, label: "Humidity", value: "60%" },
+    { icon: Sun, label: "Condition", value: "Sunny" },
+    { icon: WindIcon, label: "Wind Speed", value: "12 km/h" },
+  ];
+
+  const energyData = [
+    { day: "Mon", usage: 12 },
+    { day: "Tue", usage: 18 },
+    { day: "Wed", usage: 10 },
+    { day: "Thu", usage: 22 },
+    { day: "Fri", usage: 16 },
+    { day: "Sat", usage: 35 },
+    { day: "Sun", usage: 20 },
+  ];
+
   // Initialize greeting and emoji based on current time
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -123,6 +155,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
+        {/* Left Container */}
         <div className="lg:col-span-2 space-y-6">
           {/* Temperature */}
           <div className="space-y-6">
@@ -163,12 +196,69 @@ export default function DashboardPage() {
                   deviceName={device.deviceName}
                   location={device.location}
                   icon={device.icon}
+                  initialSwitch={device.initialSwitch}
                 />
               ))}
             </div>
           </div>
         </div>
-        <div className="lg:col-span-1">Cont 2</div>
+
+        {/* Right Container */}
+        <div className="lg:col-span-1 space-y-6">
+          {/*  Energy Monitor */}
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center gap-2">
+              <div className="bg-green-500 p-2 rounded-xl">
+                <Zap className="text-white" />
+              </div>
+              <h1 className="text-lg font-semibold">Energy Monitor</h1>
+            </div>
+
+            {/* Energy Monitor Graph */}
+            <Card className="p-4 shadow-none h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={energyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="day" />
+                  <YAxis unit=" kWh" />
+                  <Tooltip />
+                  <Bar dataKey="usage" fill="#10b981" radius={[8, 8, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </Card>
+          </div>
+
+          {/* Weather */}
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center gap-2">
+              <div className="bg-yellow-500 p-2 rounded-xl">
+                <Cloud className="text-white" />
+              </div>
+              <h1 className="text-lg font-semibold">Weather</h1>
+            </div>
+
+            {/* Weather details */}
+            <Card className="p-4 shadow-none">
+              <Table>
+                <TableBody>
+                  {weatherData.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="flex items-center gap-2 font-medium text-gray-700 border-0  py-3">
+                        <item.icon className="size-5" />
+                        {item.label}
+                      </TableCell>
+                      <TableCell className="text-right font-semibold border-0  py-3">
+                        {item.value}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Card>
+          </div>
+        </div>
       </div>
     </section>
   );
