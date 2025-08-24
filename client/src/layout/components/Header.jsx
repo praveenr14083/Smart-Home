@@ -7,7 +7,7 @@ export function Header({ profileImage }) {
   const toggleSidebar = useSidebarStore((state) => state.toggle);
 
   return (
-    <header className="h-16 border-b bg-background flex items-center justify-between px-4">
+    <header className="h-17 border-b bg-background flex items-center justify-between px-4">
       {/* Left side */}
       <div className="flex items-center gap-2">
         <Button
@@ -18,7 +18,7 @@ export function Header({ profileImage }) {
         >
           <PanelLeft className="size-5" />
         </Button>
-        <span className="font-bold text-lg hidden md:block">SmartHome</span>
+        <span className="font-bold text-lg">SmartHome</span>
       </div>
 
       {/* Right side - Profile */}

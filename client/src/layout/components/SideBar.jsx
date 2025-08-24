@@ -20,7 +20,7 @@ export function Sidebar() {
       <aside
         className={cn(
           "h-screen border-r bg-background transition-all duration-300 md:flex-col hidden md:flex",
-          isOpen ? "w-64" : "w-16"
+          isOpen ? "w-56" : "w-16"
         )}
       >
         <div
