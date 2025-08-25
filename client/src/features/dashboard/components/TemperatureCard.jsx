@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -12,7 +13,7 @@ import { HomeIcon } from "lucide-react";
 
 export default function TemperatureCard({
   temperature,
-  unit = "°C",
+  unit = "C",
   location,
   initialSwitch = false,
   icon,
@@ -22,23 +23,30 @@ export default function TemperatureCard({
   const Icon = icon || HomeIcon;
 
   return (
-    <Card className="gap-4 shadow-none">
-      <CardHeader>
-        <CardTitle className="flex flex-col gap-3">
-          <h1 className="text-muted-foreground font-semibold ">{location}</h1>
-        </CardTitle>
+    <Card
+      onClick={() => setIsOn(!isOn)}
+      className="gap-4 shadow-none cursor-pointer"
+    >
+      <CardHeader className="flex flex-col gap-3">
+        <CardTitle>Temperature</CardTitle>
+        <CardDescription>{location}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex gap-2 items-center m-0">
         <ThermometerSun />
         <div className="flex items-end gap-2">
-          <h1 className="text-2xl font-semibold">{temperature}</h1>
+          <h1 className="text-2xl font-semibold">
+            {temperature}
+            <span>°</span>
+          </h1>
           <p className="text-muted-foreground">{unit}</p>
         </div>
       </CardContent>
 
       <CardFooter className="flex items-center justify-between gap-2">
-        <div className="bg-blue-500 p-2 rounded-xl">
+        <div
+          className={`${isOn ? "bg-blue-500" : "bg-gray-500"} p-2 rounded-xl`}
+        >
           <Icon className="text-white" />
         </div>
 

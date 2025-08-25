@@ -220,9 +220,23 @@ export default function DashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={energyData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis unit=" kWh" />
-                  <Tooltip />
+                  <XAxis dataKey="day" tick={{ fontSize: 12 }} interval={0} />
+                  <YAxis unit=" kWh" tick={{ fontSize: 12 }} interval={0} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f2937", // dark: gray-800
+                      borderRadius: "8px",
+                      border: "none",
+                      color: "#f9fafb", // dark: gray-50
+                    }}
+                    labelStyle={{
+                      color: "#f9fafb", // white text
+                      fontWeight: "bold",
+                    }}
+                    itemStyle={{
+                      color: "#f9fafb", // white for items
+                    }}
+                  />
                   <Bar dataKey="usage" fill="#10b981" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -240,12 +254,12 @@ export default function DashboardPage() {
             </div>
 
             {/* Weather details */}
-            <Card className="p-4 shadow-none">
+            <Card className="p-6 shadow-none">
               <Table>
                 <TableBody>
                   {weatherData.map((item, index) => (
                     <TableRow key={index}>
-                      <TableCell className="flex items-center gap-2 font-medium text-gray-700 border-0  py-3">
+                      <TableCell className="flex items-center gap-2 font-medium border-0  py-3">
                         <item.icon className="size-5" />
                         {item.label}
                       </TableCell>

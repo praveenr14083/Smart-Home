@@ -21,17 +21,19 @@ export default function DeviceCard({
   const Icon = icon || HomeIcon;
 
   return (
-    <Card className="gap-4 shadow-none">
+    <Card
+      onClick={() => setIsOn(!isOn)}
+      className="gap-4 shadow-none cursor-pointer"
+    >
       <CardHeader className="flex flex-col gap-3">
-        <CardTitle className="text-muted-foreground font-semibold flex items-center gap-3">
-          {deviceName}
-        </CardTitle>
-
+        <CardTitle>{deviceName}</CardTitle>
         <CardDescription>{location}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex items-center justify-between">
-        <div className="bg-blue-500 p-2 rounded-xl">
+        <div
+          className={`${isOn ? "bg-blue-500" : "bg-gray-500"} p-2 rounded-xl`}
+        >
           <Icon className="text-white" /> {/* now Icon is used */}
         </div>
         <Switch checked={isOn} onCheckedChange={() => setIsOn(!isOn)} />

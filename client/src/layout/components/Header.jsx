@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { PanelLeft, User2 } from "lucide-react";
 import { useSidebarStore } from "@/store/sidebarStore";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import ThemeToggleBtn from "@/theme/ThemeToggleBtn";
 
 export function Header({ profileImage }) {
   const toggleSidebar = useSidebarStore((state) => state.toggle);
@@ -23,6 +24,7 @@ export function Header({ profileImage }) {
 
       {/* Right side - Profile */}
       <div className="flex items-center gap-2">
+        <ThemeToggleBtn />
         <Button variant="ghost" size="icon" className="p-0 hover:bg-[none]">
           <Avatar>
             {profileImage ? (
