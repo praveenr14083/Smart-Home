@@ -216,8 +216,12 @@ export default function DashboardPage() {
             </div>
 
             {/* Energy Monitor Graph */}
-            <Card className="p-4 shadow-none h-64">
-              <ResponsiveContainer width="100%" height="100%">
+            <Card className="p-4 shadow-none h-[202px]">
+              <ResponsiveContainer
+                width="100%"
+                height="100%"
+                className="relative right-2 top-2"
+              >
                 <BarChart data={energyData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="day" tick={{ fontSize: 12 }} interval={0} />
