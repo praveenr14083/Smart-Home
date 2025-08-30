@@ -70,7 +70,7 @@ export function Sidebar() {
         <div className="flex items-center justify-between p-4">
           <span className="text-xl font-bold">SmartHome</span>
           <Button variant="ghost" size="icon" onClick={toggle}>
-            <X className="size-5" />
+            <Iconify icon="lucide:x" />
           </Button>
         </div>
 
