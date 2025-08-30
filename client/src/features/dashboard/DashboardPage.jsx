@@ -1,26 +1,7 @@
 import React, { useState } from "react";
-import TemperatureCard from "./components/TemperatureCard";
+import { TemperatureCard } from "./components/TemperatureCard";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import {
-  LightbulbIcon,
-  FanIcon,
-  CirclePower,
-  ThermometerSun,
-  BedIcon,
-  BathIcon,
-  CookingPotIcon,
-  WindIcon,
-  HeaterIcon,
-  LampIcon,
-  TvIcon,
-  SpeakerIcon,
-  RouterIcon,
-  Droplets,
-  Sun,
-  Cloud,
-  Zap,
-} from "lucide-react";
-import DeviceCard from "./components/DeviceCard";
+import DeviceCard from "../../components/shared/DeviceCard";
 import { Card } from "@/components/ui/card";
 import {
   ResponsiveContainer,
@@ -31,6 +12,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { Iconify } from "@/lib/Iconify";
 
 export default function DashboardPage() {
   const [userName] = useState("Praveen");
@@ -40,25 +22,25 @@ export default function DashboardPage() {
       location: "Living Room",
       temperature: 35,
       initialSwitch: true,
-      icon: LampIcon,
+      icon: "lucide:lamp",
     },
     {
       location: "Bedroom",
       temperature: 28,
       initialSwitch: false,
-      icon: BedIcon,
+      icon: "lucide:bed",
     },
     {
       location: "Kitchen",
       temperature: 32,
       initialSwitch: true,
-      icon: CookingPotIcon,
+      icon: "lucide:utensils-crossed",
     },
     {
       location: "Bathroom",
       temperature: 30,
       initialSwitch: false,
-      icon: BathIcon,
+      icon: "lucide:shower-head",
     },
   ];
 
@@ -67,60 +49,59 @@ export default function DashboardPage() {
     {
       deviceName: "Ceiling Light",
       location: "Living Room",
-      icon: LightbulbIcon,
+      icon: "lucide:lightbulb",
       initialSwitch: true,
     },
     {
       deviceName: "Fan",
       location: "Bedroom",
-      icon: FanIcon,
+      icon: "lucide:fan",
       initialSwitch: false,
     },
     {
       deviceName: "Air Purifier",
       location: "Kitchen",
-      icon: WindIcon,
+      icon: "lucide:wind",
       initialSwitch: true,
     },
     {
       deviceName: "Heater",
       location: "Bathroom",
-      icon: HeaterIcon,
+      icon: "mdi:electric-water-heater",
       initialSwitch: false,
     },
     {
       deviceName: "Table Lamp",
       location: "Living Room",
-      icon: LampIcon,
+      icon: "lucide:lamp",
       initialSwitch: true,
     },
     {
       deviceName: "Smart TV",
       location: "Bedroom",
-      icon: TvIcon,
+      icon: "lucide:tv",
       initialSwitch: true,
     },
     {
       deviceName: "Smart Speaker",
       location: "Kitchen",
-      icon: SpeakerIcon,
+      icon: "lucide:speaker",
       initialSwitch: false,
     },
     {
       deviceName: "WiFi Router",
       location: "Living Room",
-      icon: RouterIcon,
+      icon: "lucide:router",
       initialSwitch: true,
     },
   ];
 
   const weatherData = [
-    { icon: ThermometerSun, label: "Temperature", value: "32°C" },
-    { icon: Droplets, label: "Humidity", value: "60%" },
-    { icon: Sun, label: "Condition", value: "Sunny" },
-    { icon: WindIcon, label: "Wind Speed", value: "12 km/h" },
+    { icon: "lucide:thermometer-sun", label: "Temperature", value: "32°C" },
+    { icon: "lucide:droplets", label: "Humidity", value: "60%" },
+    { icon: "lucide:sun", label: "Condition", value: "Sunny" },
+    { icon: "lucide:wind", label: "Wind Speed", value: "12 km/h" },
   ];
-
   const energyData = [
     { day: "Mon", usage: 12 },
     { day: "Tue", usage: 18 },
@@ -161,7 +142,7 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <div className="bg-orange-500 p-2 rounded-xl">
-                <ThermometerSun className="text-white" />
+                <Iconify icon="lucide:thermometer-sun" className="text-white" />
               </div>
 
               <h1 className="text-lg font-semibold">Temperature</h1>
@@ -184,7 +165,7 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <div className="bg-green-500 p-2 rounded-xl">
-                <CirclePower className="text-white" />
+                <Iconify icon="lucide:power" className="text-white" />
               </div>
 
               <h1 className="text-lg font-semibold">Devices</h1>
@@ -210,7 +191,7 @@ export default function DashboardPage() {
             {/* Header */}
             <div className="flex items-center gap-2">
               <div className="bg-green-500 p-2 rounded-xl">
-                <Zap className="text-white" />
+                <Iconify icon="ic:round-bar-chart" className="text-white" />
               </div>
               <h1 className="text-lg font-semibold">Energy Monitor</h1>
             </div>
@@ -252,7 +233,7 @@ export default function DashboardPage() {
             {/* Header */}
             <div className="flex items-center gap-2">
               <div className="bg-yellow-500 p-2 rounded-xl">
-                <Cloud className="text-white" />
+                <Iconify icon="lucide:cloud" className="text-white" />
               </div>
               <h1 className="text-lg font-semibold">Weather</h1>
             </div>
@@ -264,7 +245,7 @@ export default function DashboardPage() {
                   {weatherData.map((item, index) => (
                     <TableRow key={index}>
                       <TableCell className="flex items-center gap-2 font-medium border-0  py-3">
-                        <item.icon className="size-5" />
+                        <Iconify icon={item.icon} />
                         {item.label}
                       </TableCell>
                       <TableCell className="text-right font-semibold border-0  py-3">

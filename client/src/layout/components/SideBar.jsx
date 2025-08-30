@@ -1,14 +1,14 @@
-import { Home, Monitor, Bed, Settings, X, PanelLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/store/sidebarStore";
+import { Iconify } from "@/lib/Iconify";
 
 const sidebarItems = [
-  { label: "Dashboard", icon: Home, href: "/" },
-  { label: "Devices", icon: Monitor, href: "/devices" },
-  { label: "Rooms", icon: Bed, href: "/rooms" },
-  { label: "Settings", icon: Settings, href: "/settings" },
+  { label: "Dashboard", icon: "lucide:home", href: "/" },
+  { label: "Devices", icon: "lucide:monitor", href: "/devices" },
+  { label: "Rooms", icon: "lucide:bed", href: "/rooms" },
+  { label: "Settings", icon: "lucide:settings", href: "/settings" },
 ];
 
 export function Sidebar() {
@@ -32,9 +32,9 @@ export function Sidebar() {
           {isOpen && <span className="text-xl font-bold">SmartHome</span>}
           <Button variant="ghost" size="icon" onClick={toggle}>
             {isOpen ? (
-              <PanelLeft className="size-5" />
+              <Iconify icon="lucide:x" />
             ) : (
-              <X className="size-5" />
+              <Iconify icon="lucide:panel-left" />
             )}
           </Button>
         </div>
@@ -52,7 +52,7 @@ export function Sidebar() {
               onClick={close}
             >
               <Link to={item.href}>
-                <item.icon className="size-5" />
+                <Iconify icon={item.icon} />
                 {isOpen && <span>{item.label}</span>}
               </Link>
             </Button>
@@ -84,7 +84,7 @@ export function Sidebar() {
               onClick={close}
             >
               <Link to={item.href}>
-                <item.icon className="size-5" />
+                <Iconify icon={item.icon} />
                 <span>{item.label}</span>
               </Link>
             </Button>

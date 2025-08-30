@@ -7,18 +7,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { HomeIcon } from "lucide-react";
+import { Iconify } from "@/lib/Iconify";
 
 export default function DeviceCard({
   deviceName,
   location,
-  icon,
+  icon = "lucide:home",
   initialSwitch = false,
 }) {
   const [isOn, setIsOn] = useState(initialSwitch);
-
-  // Use default icon if none is passed
-  const Icon = icon || HomeIcon;
 
   return (
     <Card
@@ -34,7 +31,7 @@ export default function DeviceCard({
         <div
           className={`${isOn ? "bg-blue-500" : "bg-gray-500"} p-2 rounded-xl`}
         >
-          <Icon className="text-white" /> {/* now Icon is used */}
+          <Iconify icon={icon} className="text-white" />
         </div>
         <Switch checked={isOn} onCheckedChange={() => setIsOn(!isOn)} />
       </CardContent>

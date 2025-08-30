@@ -1,6 +1,6 @@
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun } from "lucide-react";
+import { Iconify } from "@/lib/Iconify";
 
 export default function ThemeToggleBtn() {
   const { theme, toggleTheme } = useTheme();
@@ -13,9 +13,9 @@ export default function ThemeToggleBtn() {
       className="rounded-full w-10 h-10"
     >
       {theme === "dark" ? (
-        <Sun className="text-yellow-400" />
+        <Iconify icon="lucide:sun" />
       ) : (
-        <Moon className="text-blue-500" />
+        <Iconify icon="lucide:moon" />
       )}
     </Button>
   );

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { PanelLeft, User2 } from "lucide-react";
 import { useSidebarStore } from "@/store/sidebarStore";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ThemeToggleBtn from "@/theme/ThemeToggleBtn";
+import { Iconify } from "@/lib/Iconify";
 
 export function Header({ profileImage }) {
   const toggleSidebar = useSidebarStore((state) => state.toggle);
@@ -17,7 +17,7 @@ export function Header({ profileImage }) {
           className="md:hidden"
           onClick={toggleSidebar}
         >
-          <PanelLeft className="size-5" />
+          <Iconify icon="lucide:panel-left" />
         </Button>
         <span className="font-bold text-lg">SmartHome</span>
       </div>
@@ -31,7 +31,7 @@ export function Header({ profileImage }) {
               <AvatarImage src={profileImage} alt="Profile" />
             ) : (
               <AvatarFallback>
-                <User2 className="size-5" />
+                <Iconify icon="lucide:user-round" />
               </AvatarFallback> // fallback initial or icon
             )}
           </Avatar>

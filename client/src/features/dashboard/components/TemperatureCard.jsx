@@ -8,19 +8,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { ThermometerSun } from "lucide-react";
-import { HomeIcon } from "lucide-react";
+import { Iconify } from "@/lib/Iconify";
 
-export default function TemperatureCard({
+export function TemperatureCard({
   temperature,
   unit = "C",
   location,
   initialSwitch = false,
-  icon,
+  icon = "lucide:home",
 }) {
   const [isOn, setIsOn] = useState(initialSwitch);
-
-  const Icon = icon || HomeIcon;
 
   return (
     <Card
@@ -33,7 +30,7 @@ export default function TemperatureCard({
       </CardHeader>
 
       <CardContent className="flex gap-2 items-center m-0">
-        <ThermometerSun />
+        <Iconify icon="lucide:thermometer-sun" />
         <div className="flex items-end gap-2">
           <h1 className="text-2xl font-semibold">
             {temperature}
@@ -47,7 +44,7 @@ export default function TemperatureCard({
         <div
           className={`${isOn ? "bg-blue-500" : "bg-gray-500"} p-2 rounded-xl`}
         >
-          <Icon className="text-white" />
+          <Iconify icon={icon} className="text-white" />
         </div>
 
         <Switch checked={isOn} onCheckedChange={() => setIsOn(!isOn)} />
