@@ -36,12 +36,6 @@ export default function DashboardPage() {
       initialSwitch: true,
       icon: "lucide:utensils-crossed",
     },
-    {
-      location: "Bathroom",
-      temperature: 30,
-      initialSwitch: false,
-      icon: "lucide:shower-head",
-    },
   ];
 
   // Devices with correct icons
@@ -135,7 +129,7 @@ export default function DashboardPage() {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-6">
         {/* Left Container */}
         <div className="lg:col-span-2 space-y-6">
           {/* Temperature */}
@@ -148,7 +142,7 @@ export default function DashboardPage() {
               <h1 className="text-lg font-semibold">Temperature</h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {rooms.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -170,7 +164,7 @@ export default function DashboardPage() {
 
               <h1 className="text-lg font-semibold">Devices</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {devices.map((device, index) => (
                 <DeviceCard
                   key={index}
@@ -243,7 +237,7 @@ export default function DashboardPage() {
               <Table>
                 <TableBody>
                   {weatherData.map((item, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className="hover:bg-[none]">
                       <TableCell className="flex items-center gap-2 font-medium border-0  py-3">
                         <Iconify icon={item.icon} />
                         {item.label}
