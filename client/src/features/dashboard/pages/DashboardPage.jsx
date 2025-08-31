@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TemperatureCard } from "./components/TemperatureCard";
+import { TemperatureCard } from "../components/TemperatureCard";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import DeviceCard from "../../components/shared/DeviceCard";
+import DeviceCard from "../../../components/shared/DeviceCard";
 import { Card } from "@/components/ui/card";
 import {
   ResponsiveContainer,

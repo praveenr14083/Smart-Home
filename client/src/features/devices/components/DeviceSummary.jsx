@@ -3,7 +3,7 @@ import { Iconify } from "@/lib/Iconify";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-export default function DeviceSummary() {
+export function DeviceSummary() {
   // 📊 Device Summary Data
   const deviceSummaryData = [
     { icon: "lucide:monitor", label: "Total Devices", value: "24" },

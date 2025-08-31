@@ -50,7 +50,7 @@ export function DeviceActions() {
 
       {/* Create New Button */}
       <div className="hidden lg:flex justify-end">
-        <Button className="flex items-center gap-2 bg-blue-500 text-white">
+        <Button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white">
           <Iconify icon="lucide:plus" className="h-4 w-4" />
           Create New
         </Button>

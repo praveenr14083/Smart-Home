@@ -1,7 +1,7 @@
 import React from "react";
 import DeviceCard from "@/components/shared/DeviceCard";
-import { DeviceActions } from "./components/DeviceActions";
-import { DeviceSummary } from "./components/DeviceSummary";
+import { DeviceActions } from "../components/DeviceActions";
+import { DeviceSummary } from "../components/DeviceSummary";
 
 export default function DevicesPage() {
   const devices = [

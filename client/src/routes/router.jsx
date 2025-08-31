@@ -5,8 +5,10 @@ import {
   RouterProvider,
 } from "@tanstack/react-router";
 import MainLayout from "@/layout/MainLayout";
-import DashboardPage from "@/features/dashboard/DashboardPage";
-import DevicesPage from "@/features/devices/DevicesPage";
+import DashboardPage from "@/features/dashboard/pages/DashboardPage";
+import DevicesPage from "@/features/devices/pages/DevicesPage";
+import IndoorPage from "../features/spaces/indoor/pages/IndoorPage";
+import OutdoorPage from "@/features/spaces/outdoor/pages/OutdoorPage";
 
 // Root Layout
 const rootRoute = createRootRoute({
@@ -26,8 +28,25 @@ const devicesRoute = createRoute({
   component: DevicesPage,
 });
 
+const indoorRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/indoor",
+  component: IndoorPage,
+});
+
+const outdoorRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/outdoor",
+  component: OutdoorPage,
+});
+
 // Route Tree
-const routeTree = rootRoute.addChildren([dashboardRoute, devicesRoute]);
+const routeTree = rootRoute.addChildren([
+  dashboardRoute,
+  devicesRoute,
+  indoorRoute,
+  outdoorRoute,
+]);
 
 // ✅ Correct way: use createRouter
 const router = createRouter({
