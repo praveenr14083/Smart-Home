@@ -13,6 +13,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Iconify } from "@/lib/Iconify";
+import SpaceCardDashboard from "../components/SpaceCardDashboard";
 
 export default function DashboardPage() {
   const [userName] = useState("Praveen");
@@ -35,6 +36,41 @@ export default function DashboardPage() {
       temperature: 32,
       initialSwitch: true,
       icon: "lucide:utensils-crossed",
+    },
+  ];
+
+  const spaces = [
+    {
+      id: 1,
+      name: "Living Room",
+      devices: 4,
+      image:
+        "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=500&q=80", // Living room image
+      initialSwitch: true,
+    },
+    {
+      id: 2,
+      name: "Kitchen",
+      devices: 2,
+      image:
+        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=500&q=80", // Kitchen image
+      initialSwitch: true,
+    },
+    {
+      id: 3,
+      name: "Garden",
+      devices: 1,
+      image:
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80", // Garden image
+      initialSwitch: false,
+    },
+    {
+      id: 4,
+      name: "Kitchen",
+      devices: 4,
+      image:
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=500&q=80", // Kitchen image
+      initialSwitch: false,
     },
   ];
 
@@ -150,6 +186,28 @@ export default function DashboardPage() {
                   temperature={room.temperature}
                   initialSwitch={room.initialSwitch}
                   icon={room.icon}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Spaces */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="bg-violet-500 p-2 rounded-xl">
+                <Iconify icon="lucide:door-open" className="text-white" />
+              </div>
+
+              <h1 className="text-lg font-semibold">Quick Access</h1>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {spaces.map((space) => (
+                <SpaceCardDashboard
+                  key={space.id}
+                  name={space.name}
+                  devices={space.devices}
+                  image={space.image}
+                  initialSwitch={space.initialSwitch}
                 />
               ))}
             </div>
