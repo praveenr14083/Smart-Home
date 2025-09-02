@@ -2,6 +2,7 @@ import React from "react";
 import DeviceCard from "@/components/shared/DeviceCard";
 import { DeviceActions } from "../components/DeviceActions";
 import { DeviceSummary } from "../components/DeviceSummary";
+import { FloatingButton } from "@/components/common/button/FloatingButton";
 
 export default function DevicesPage() {
   const devices = [
@@ -178,6 +179,8 @@ export default function DevicesPage() {
           <DeviceSummary />
         </div>
       </div>
+
+      <FloatingButton />
     </section>
   );
 }

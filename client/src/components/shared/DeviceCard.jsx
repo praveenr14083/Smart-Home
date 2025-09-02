@@ -23,7 +23,9 @@ export default function DeviceCard({
   return (
     <Card
       onClick={() => setIsOn(!isOn)}
-      className="gap-4 shadow-none cursor-pointer"
+      className={`gap-4 shadow-none cursor-pointer ${
+        isOn && "border-blue-500/50 md:border-border"
+      }`}
     >
       <CardHeader className="flex justify-between">
         <div className="flex flex-col gap-3">
