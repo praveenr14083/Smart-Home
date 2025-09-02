@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Iconify } from "@/lib/Iconify";
-import SpaceCardDashboard from "../components/SpaceCardDashboard";
+import { SpaceCard } from "@/components/shared/SpaceCard";
 
 export default function DashboardPage() {
   const [userName] = useState("Praveen");
@@ -50,14 +50,6 @@ export default function DashboardPage() {
     },
     {
       id: 2,
-      name: "Kitchen",
-      devices: 2,
-      image:
-        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=500&q=80", // Kitchen image
-      initialSwitch: true,
-    },
-    {
-      id: 3,
       name: "Garden",
       devices: 1,
       image:
@@ -65,7 +57,7 @@ export default function DashboardPage() {
       initialSwitch: false,
     },
     {
-      id: 4,
+      id: 3,
       name: "Kitchen",
       devices: 4,
       image:
@@ -200,9 +192,9 @@ export default function DashboardPage() {
 
               <h1 className="text-lg font-semibold">Quick Access</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {spaces.map((space) => (
-                <SpaceCardDashboard
+                <SpaceCard
                   key={space.id}
                   name={space.name}
                   devices={space.devices}

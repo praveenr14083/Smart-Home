@@ -16,7 +16,7 @@ import {
  *   initialSwitch?: boolean,
  * }} props
  */
-export default function SpaceCardDashboard({
+export function SpaceCard({
   name = "Living Room",
   devices = 3,
   image = "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=500&q=80",
@@ -25,13 +25,9 @@ export default function SpaceCardDashboard({
   const [isOn, setIsOn] = useState(initialSwitch);
 
   return (
-    <Card className="p-0 rounded-2xl shadow-none gap-0">
+    <Card className="p-0 rounded-2xl shadow-none gap-0 overflow-hidden">
       <CardContent className="p-0">
-        <img
-          src={image}
-          alt={name}
-          className="rounded-2xl w-full h-40 object-cover"
-        />
+        <img src={image} alt={name} className="w-full h-40 object-cover" />
       </CardContent>
       <CardFooter className="flex justify-between gap-1 p-4">
         <div>
