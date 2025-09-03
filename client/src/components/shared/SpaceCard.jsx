@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { Link } from "@tanstack/react-router";
 import {
   Tooltip,
   TooltipContent,
@@ -8,27 +9,23 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-/**
- * @param {{
- *   name: string,
- *   devices: number,
- *   image: string,
- *   initialSwitch?: boolean,
- * }} props
- */
 export function SpaceCard({
   name = "Living Room",
   devices = 3,
   image = "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=500&q=80",
   initialSwitch = false,
+  to,
 }) {
   const [isOn, setIsOn] = useState(initialSwitch);
 
   return (
     <Card className="p-0 rounded-2xl shadow-none gap-0 overflow-hidden">
-      <CardContent className="p-0">
-        <img src={image} alt={name} className="w-full h-40 object-cover" />
-      </CardContent>
+      <Link to={to || "#"} className="block">
+        <CardContent className="p-0">
+          <img src={image} alt={name} className="w-full h-40 object-cover" />
+        </CardContent>
+      </Link>
+
       <CardFooter className="flex justify-between gap-1 p-4">
         <div>
           <h1 className="text-base font-semibold">{name}</h1>

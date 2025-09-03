@@ -7,8 +7,8 @@ import {
 import MainLayout from "@/layout/MainLayout";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import DevicesPage from "@/features/devices/pages/DevicesPage";
-import IndoorPage from "../features/spaces/indoor/pages/IndoorPage";
-import OutdoorPage from "@/features/spaces/outdoor/pages/OutdoorPage";
+import SpacePage from "@/features/spaces/pages/SpacePage";
+import SpaceDevicesPage from "@/features/spaceDevices/page/SpaceDevicesPage";
 
 // Root Layout
 const rootRoute = createRootRoute({
@@ -28,24 +28,24 @@ const devicesRoute = createRoute({
   component: DevicesPage,
 });
 
-const indoorRoute = createRoute({
+const spaceRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/indoor",
-  component: IndoorPage,
+  path: "/space/$type", // dynamic param (indoor | outdoor)
+  component: SpacePage,
 });
 
-const outdoorRoute = createRoute({
+const spaceDevicesRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/outdoor",
-  component: OutdoorPage,
+  path: "/space/$type/$roomName",
+  component: SpaceDevicesPage,
 });
 
 // Route Tree
 const routeTree = rootRoute.addChildren([
   dashboardRoute,
   devicesRoute,
-  indoorRoute,
-  outdoorRoute,
+  spaceRoute,
+  spaceDevicesRoute,
 ]);
 
 // ✅ Correct way: use createRouter
