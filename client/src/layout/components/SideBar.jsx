@@ -7,8 +7,8 @@ import { Iconify } from "@/lib/Iconify";
 const sidebarItems = [
   { label: "Dashboard", icon: "lucide:layout-dashboard", href: "/" },
   { label: "Devices", icon: "lucide:monitor", href: "/devices" },
-  { label: "Indoor", icon: "lucide:home", href: "/space/indoor" },
-  { label: "Outdoor", icon: "lucide:tree-palm", href: "/space/outdoor" },
+  { label: "Indoor", icon: "lucide:home", href: "/indoor" },
+  { label: "Outdoor", icon: "lucide:tree-palm", href: "/outdoor" },
   { label: "Settings", icon: "lucide:settings", href: "/settings" },
 ];
 

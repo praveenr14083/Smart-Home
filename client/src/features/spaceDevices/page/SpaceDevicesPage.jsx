@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "@tanstack/react-router";
 import DeviceCard from "@/components/shared/DeviceCard";
+import { PageHeader } from "@/components/common/PageHeader";
 
 // 🔹 Example static data (replace later with API/DB)
 const spaceDevices = {
@@ -93,11 +94,11 @@ const spaceDevices = {
 };
 
 export default function SpaceDevicesPage() {
-  // ✅ Params from /space/$type/$roomName
-  const { type, roomName } = useParams({ from: "/space/$type/$roomName" });
+  // ✅ Params from /$space/$roomName
+  const { space, roomName } = useParams({ from: "/$space/$roomName" });
 
   // ✅ Get devices list
-  const devices = spaceDevices[type]?.[roomName?.toLowerCase()] || [];
+  const devices = spaceDevices[space]?.[roomName?.toLowerCase()] || [];
 
   if (!devices.length) {
     return (
@@ -112,9 +113,7 @@ export default function SpaceDevicesPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-6">
-        {roomName.charAt(0).toUpperCase() + roomName.slice(1)} ({type})
-      </h1>
+      <PageHeader />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
         {devices.map((device) => (

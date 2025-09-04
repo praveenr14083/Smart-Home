@@ -1,5 +1,6 @@
 import { useParams } from "@tanstack/react-router";
 import { SpaceCard } from "@/components/shared/SpaceCard";
+import { PageHeader } from "@/components/common/PageHeader";
 
 const indoorSpaces = [
   {
@@ -61,13 +62,13 @@ function slugify(str) {
 }
 
 export default function SpacePage() {
-  const { type } = useParams({ from: "/space/$type" });
+  const { space } = useParams({ from: "/$space" });
 
   let spaces = null;
 
-  if (type === "indoor") {
+  if (space === "indoor") {
     spaces = indoorSpaces;
-  } else if (type === "outdoor") {
+  } else if (space === "outdoor") {
     spaces = outdoorSpaces;
   } else {
     return <h1>404</h1>; // ⬅️ invalid param → show 404
@@ -75,20 +76,18 @@ export default function SpacePage() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-6">
-        {type.charAt(0).toUpperCase() + type.slice(1)} Spaces
-      </h1>
+      <PageHeader />
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {spaces.map((space) => (
+        {spaces.map((room) => (
           <SpaceCard
-            key={space.id}
-            name={space.name}
-            devices={space.devices}
-            image={space.image}
-            initialSwitch={space.initialSwitch}
-            // ✅ pass route → /space/:type/:roomName
-            to={`/space/${type}/${slugify(space.name)}`}
+            key={room.id}
+            name={room.name}
+            devices={room.devices}
+            image={room.image}
+            initialSwitch={room.initialSwitch}
+            // ✅ param + room slug → /indoor/livingroom OR /outdoor/garden
+            to={`/${space}/${slugify(room.name)}`}
           />
         ))}
       </div>

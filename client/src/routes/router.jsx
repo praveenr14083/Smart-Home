@@ -30,13 +30,13 @@ const devicesRoute = createRoute({
 
 const spaceRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/space/$type", // dynamic param (indoor | outdoor)
+  path: "/$space", // dynamic param (indoor | outdoor)
   component: SpacePage,
 });
 
 const spaceDevicesRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/space/$type/$roomName",
+  path: "/$space/$roomName",
   component: SpaceDevicesPage,
 });
 

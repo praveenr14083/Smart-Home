@@ -14,22 +14,6 @@ export function DeviceActions() {
   return (
     <header className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center">
       <div className="flex flex-col md:flex-row md:items-center lg:col-span-2 gap-4">
-        {/* Title with icon */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-green-500 p-2 rounded-xl">
-              <Iconify icon="lucide:power" className="text-white" />
-            </div>
-            <h1 className="text-lg font-semibold">All Devices</h1>
-          </div>
-
-          <div></div>
-          <Button className="md:hidden flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white">
-            <Iconify icon="lucide:power" className="h-4 w-4" />
-            Turn all on
-          </Button>
-        </div>
-
         {/* Search + Filter */}
         <div className="flex flex-col md:flex-row flex-1 gap-6 items-center lg:justify-center">
           {/* Search Input */}

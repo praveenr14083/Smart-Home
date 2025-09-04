@@ -3,6 +3,9 @@ import DeviceCard from "@/components/shared/DeviceCard";
 import { DeviceActions } from "../components/DeviceActions";
 import { DeviceSummary } from "../components/DeviceSummary";
 import { FloatingButton } from "@/components/common/button/FloatingButton";
+import { Iconify } from "@/lib/Iconify";
+import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/common/PageHeader";
 
 export default function DevicesPage() {
   const devices = [
@@ -153,6 +156,7 @@ export default function DevicesPage() {
   ];
   return (
     <section>
+      <PageHeader />
       <DeviceActions />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-6">
