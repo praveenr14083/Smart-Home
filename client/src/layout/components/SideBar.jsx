@@ -15,6 +15,12 @@ const sidebarItems = [
 export function Sidebar() {
   const { isOpen, toggle, close } = useSidebarStore();
 
+  // fake logout handler (replace with your logic)
+  const handleLogout = () => {
+    console.log("User logged out");
+    // Example: clear auth store, redirect to login, etc.
+  };
+
   return (
     <>
       {/* Desktop Sidebar */}
@@ -40,7 +46,7 @@ export function Sidebar() {
           </Button>
         </div>
 
-        <nav className="flex flex-col gap-2 px-2">
+        <nav className="flex flex-col gap-2 px-2 flex-1">
           {sidebarItems.map((item) => (
             <Button
               key={item.href}
@@ -59,6 +65,21 @@ export function Sidebar() {
             </Button>
           ))}
         </nav>
+
+        {/* Logout Button (Desktop) */}
+        <div className="p-2">
+          <Button
+            variant="ghost"
+            className={cn(
+              "w-full gap-2 text-base text-white",
+              isOpen ? "justify-start" : "justify-center"
+            )}
+            onClick={handleLogout}
+          >
+            <Iconify icon="lucide:log-out" />
+            {isOpen && <span>Logout</span>}
+          </Button>
+        </div>
       </aside>
 
       {/* Mobile Sidebar */}
@@ -75,7 +96,7 @@ export function Sidebar() {
           </Button>
         </div>
 
-        <nav className="flex flex-col gap-2 px-2">
+        <nav className="flex flex-col gap-2 px-2 flex-1">
           {sidebarItems.map((item) => (
             <Button
               key={item.href}
@@ -90,6 +111,18 @@ export function Sidebar() {
               </Link>
             </Button>
           ))}
+
+          {/* Logout Button (Mobile) */}
+          <div>
+            <Button
+              variant="ghost"
+              className="w-full gap-2 text-base justify-start"
+              onClick={handleLogout}
+            >
+              <Iconify icon="lucide:log-out" />
+              <span>Logout</span>
+            </Button>
+          </div>
         </nav>
       </aside>
     </>
