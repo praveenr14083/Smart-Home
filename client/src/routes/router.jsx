@@ -9,6 +9,7 @@ import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import DevicesPage from "@/features/devices/pages/DevicesPage";
 import SpacePage from "@/features/spaces/pages/SpacePage";
 import SpaceDevicesPage from "@/features/spaceDevices/page/SpaceDevicesPage";
+import SettingsPage from "@/features/settings/pages/SettingsPage";
 
 // Root Layout
 const rootRoute = createRootRoute({
@@ -40,12 +41,19 @@ const spaceDevicesRoute = createRoute({
   component: SpaceDevicesPage,
 });
 
+const settingsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/settings",
+  component: SettingsPage,
+});
+
 // Route Tree
 const routeTree = rootRoute.addChildren([
   dashboardRoute,
   devicesRoute,
   spaceRoute,
   spaceDevicesRoute,
+  settingsRoute,
 ]);
 
 // ✅ Correct way: use createRouter
