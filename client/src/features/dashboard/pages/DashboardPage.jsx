@@ -47,6 +47,7 @@ export default function DashboardPage() {
       image:
         "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=500&q=80", // Living room image
       initialSwitch: true,
+      space: "indoor",
     },
     {
       id: 2,
@@ -55,6 +56,7 @@ export default function DashboardPage() {
       image:
         "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80", // Garden image
       initialSwitch: false,
+      space: "outdoor",
     },
     {
       id: 3,
@@ -63,6 +65,7 @@ export default function DashboardPage() {
       image:
         "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=500&q=80", // Kitchen image
       initialSwitch: false,
+      space: "indoor",
     },
   ];
 
@@ -200,6 +203,9 @@ export default function DashboardPage() {
                   devices={space.devices}
                   image={space.image}
                   initialSwitch={space.initialSwitch}
+                  to={`${space.space}/${space.name
+                    .toLowerCase()
+                    .replace(/\s+/g, "")}`}
                 />
               ))}
             </div>
