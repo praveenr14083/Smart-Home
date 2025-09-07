@@ -4,7 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ThemeToggleBtn from "@/theme/ThemeToggleBtn";
 import { Iconify } from "@/lib/Iconify";
 
-export function Header({ profileImage }) {
+export function Header() {
   const toggleSidebar = useSidebarStore((state) => state.toggle);
 
   return (
@@ -27,13 +27,13 @@ export function Header({ profileImage }) {
         <ThemeToggleBtn />
         <Button variant="ghost" size="icon" className="p-0 hover:bg-[none]">
           <Avatar>
-            {profileImage ? (
-              <AvatarImage src={profileImage} alt="Profile" />
-            ) : (
-              <AvatarFallback>
-                <Iconify icon="lucide:user-round" />
-              </AvatarFallback> // fallback initial or icon
-            )}
+            <AvatarImage
+              src="https://avatar.iran.liara.run/public"
+              alt="Profile"
+            />
+            <AvatarFallback>
+              <Iconify icon="lucide:user-round" />
+            </AvatarFallback>
           </Avatar>
         </Button>
       </div>
