@@ -1,69 +1,59 @@
 import {
-  createRootRoute,
-  createRoute,
-  createRouter,
-  RouterProvider,
-} from "@tanstack/react-router";
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+
 import MainLayout from "@/layout/MainLayout";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import DevicesPage from "@/features/devices/pages/DevicesPage";
 import SpacePage from "@/features/spaces/pages/SpacePage";
 import SpaceDevicesPage from "@/features/spaceDevices/page/SpaceDevicesPage";
 import SettingsPage from "@/features/settings/pages/SettingsPage";
+import LoginPage from "@/features/auth/pages/LoginPage";
+import NotFoundPage from "@/features/misc/pages/NotFoundPage";
 
-// Root Layout
-const rootRoute = createRootRoute({
-  component: MainLayout,
-});
+// 🔹 Protected Layout (with MainLayout)
+function AppLayout() {
+  const isAuthenticated = true; // Replace with your auth logic
 
-// Child Routes
-const dashboardRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: DashboardPage,
-});
+  if (!isAuthenticated) return <Navigate to="/login" />;
 
-const devicesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/devices",
-  component: DevicesPage,
-});
+  return (
+    <MainLayout>
+      <Outlet /> {/* Renders nested pages */}
+    </MainLayout>
+  );
+}
 
-const spaceRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/$space", // dynamic param (indoor | outdoor)
-  component: SpacePage,
-});
+// 🔹 Public Layout (for Auth pages)
+function AuthLayout() {
+  return <Outlet />;
+}
 
-const spaceDevicesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/$space/$roomName",
-  component: SpaceDevicesPage,
-});
+export default function AppRouter() {
+  return (
+    <Router>
+      <Routes>
+        {/* Public Auth Routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
 
-const settingsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/settings",
-  component: SettingsPage,
-});
+        {/* Protected App Routes */}
+        <Route element={<AppLayout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="devices" element={<DevicesPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path=":space" element={<SpacePage />} />
+          <Route path=":space/:roomName" element={<SpaceDevicesPage />} />
+        </Route>
 
-// Route Tree
-const routeTree = rootRoute.addChildren([
-  dashboardRoute,
-  devicesRoute,
-  spaceRoute,
-  spaceDevicesRoute,
-  settingsRoute,
-]);
-
-// ✅ Correct way: use createRouter
-const router = createRouter({
-  routeTree,
-  defaultPreload: "intent",
-  defaultPreloadStaleTime: 0,
-});
-
-// Router Provider
-export function AppRouterProvider() {
-  return <RouterProvider router={router} />;
+        {/* Fallback route */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
+  );
 }

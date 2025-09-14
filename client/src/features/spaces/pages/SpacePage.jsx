@@ -1,4 +1,4 @@
-import { useParams } from "@tanstack/react-router";
+import { useParams } from "react-router-dom"; // ✅ React Router DOM
 import { SpaceCard } from "@/components/shared/SpaceCard";
 import { PageHeader } from "@/components/common/PageHeader";
 
@@ -61,7 +61,7 @@ const spaces = [
 
 export default function SpacePage() {
   // ✅ use {space} from route → /indoor or /outdoor
-  const { space } = useParams({ from: "/$space" });
+  const { space } = useParams();
 
   // ✅ filter based on route
   const filteredSpaces = spaces.filter((room) => room.space === space);

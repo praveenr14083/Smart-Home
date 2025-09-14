@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Iconify } from "@/lib/Iconify";
-import { useRouterState } from "@tanstack/react-router";
+import { useLocation } from "react-router-dom"; // ✅ React Router
 
 export default function DeviceCard({
   deviceName,
@@ -17,7 +17,9 @@ export default function DeviceCard({
   initialSwitch = false,
 }) {
   const [isOn, setIsOn] = useState(initialSwitch);
-  const { location: routerLocation } = useRouterState(); // ✅ get current route
+
+  // ✅ Get current route using react-router-dom
+  const routerLocation = useLocation();
   const isDevicesRoute = routerLocation.pathname.startsWith("/devices");
 
   return (

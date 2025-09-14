@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import {
   Tooltip,
   TooltipContent,

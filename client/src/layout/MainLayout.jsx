@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "./components/SideBar";
 import { Header } from "./components/Header";
 

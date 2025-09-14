@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "@tanstack/react-router";
+import { useParams } from "react-router-dom"; // ✅ React Router DOM
 import DeviceCard from "@/components/shared/DeviceCard";
 import { PageHeader } from "@/components/common/PageHeader";
 
@@ -95,7 +95,7 @@ const spaceDevices = {
 
 export default function SpaceDevicesPage() {
   // ✅ Params from /$space/$roomName
-  const { space, roomName } = useParams({ from: "/$space/$roomName" });
+  const { space, roomName } = useParams();
 
   // ✅ Get devices list
   const devices = spaceDevices[space]?.[roomName?.toLowerCase()] || [];

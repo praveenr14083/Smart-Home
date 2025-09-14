@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Iconify } from "@/lib/Iconify";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export function PageHeader() {
   const navigate = useNavigate();
-  const { location } = useRouterState();
+  const location = useLocation(); // ✅ Get current route
 
   // Split path into segments
   const segments = location.pathname.split("/").filter(Boolean);
@@ -20,7 +20,7 @@ export function PageHeader() {
   return (
     <div className="mb-6 flex items-center gap-4">
       <Iconify
-        onClick={() => navigate({ to: ".." })}
+        onClick={() => navigate(-1)} // ✅ Go back one page
         icon="weui:back-filled"
         className="cursor-pointer"
       />
