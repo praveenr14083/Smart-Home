@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/store/sidebarStore";
 import { Iconify } from "@/lib/Iconify";
+import { useAuthStore } from "@/features/auth/store/authStore";
 
 const sidebarItems = [
   { label: "Dashboard", icon: "lucide:layout-dashboard", href: "/" },
@@ -14,12 +15,7 @@ const sidebarItems = [
 
 export function Sidebar() {
   const { isOpen, toggle, close } = useSidebarStore();
-
-  // fake logout handler (replace with your logic)
-  const handleLogout = () => {
-    console.log("User logged out");
-    // Example: clear auth store, redirect to login, etc.
-  };
+  const logout = useAuthStore((state) => state.logout);
 
   return (
     <>
@@ -74,7 +70,7 @@ export function Sidebar() {
               "w-full gap-2 text-base text-white",
               isOpen ? "justify-start" : "justify-center"
             )}
-            onClick={handleLogout}
+            onClick={logout}
           >
             <Iconify icon="lucide:log-out" />
             {isOpen && <span>Logout</span>}
@@ -117,7 +113,7 @@ export function Sidebar() {
             <Button
               variant="ghost"
               className="w-full gap-2 text-base justify-start"
-              onClick={handleLogout}
+              onClick={logout}
             >
               <Iconify icon="lucide:log-out" />
               <span>Logout</span>

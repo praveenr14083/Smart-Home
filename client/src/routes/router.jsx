@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   Outlet,
 } from "react-router-dom";
 
@@ -13,22 +12,21 @@ import SpacePage from "@/features/spaces/pages/SpacePage";
 import SpaceDevicesPage from "@/features/spaceDevices/page/SpaceDevicesPage";
 import SettingsPage from "@/features/settings/pages/SettingsPage";
 import LoginPage from "@/features/auth/pages/LoginPage";
+import RegisterPage from "@/features/auth/pages/RegisterPage";
 import NotFoundPage from "@/features/misc/pages/NotFoundPage";
 
-// 🔹 Protected Layout (with MainLayout)
+import { ProtectedRoute } from "./ProtectedRoute";
+
+// Layout for all protected pages
 function AppLayout() {
-  const isAuthenticated = true; // Replace with your auth logic
-
-  if (!isAuthenticated) return <Navigate to="/login" />;
-
   return (
     <MainLayout>
-      <Outlet /> {/* Renders nested pages */}
+      <Outlet />
     </MainLayout>
   );
 }
 
-// 🔹 Public Layout (for Auth pages)
+// Layout for auth pages
 function AuthLayout() {
   return <Outlet />;
 }
@@ -40,10 +38,17 @@ export default function AppRouter() {
         {/* Public Auth Routes */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
 
         {/* Protected App Routes */}
-        <Route element={<AppLayout />}>
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<DashboardPage />} />
           <Route path="devices" element={<DevicesPage />} />
           <Route path="settings" element={<SettingsPage />} />
