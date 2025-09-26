@@ -1,42 +1,52 @@
-import { AuthModel } from "../models/auth.model.js";
+import { AuthUser } from "../models/auth.model.js";
 import { hashPassword, comparePassword } from "../../../utils/hash.js";
-import { generateTokens, verifyRefreshToken } from "../../../utils/jwt.js";
+import { generateToken } from "../../../utils/jwt.js";
 
-export const AuthService = {
-  async register({ name, email, password, role }) {
-    const existingUser = await AuthModel.findByEmail(email);
-    if (existingUser) throw new Error("User already exists");
+export const registerUser = async (userData) => {
+  const existingUser = await AuthUser.findOne({
+    "profile.email": userData.email,
+  });
+  if (existingUser) throw new Error("User already exists");
 
-    const passwordHash = await hashPassword(password);
-    const newUser = await AuthModel.createUser({
-      name,
-      email,
-      role,
+  const passwordHash = await hashPassword(userData.password);
+
+  const user = new AuthUser({
+    profile: {
+      name: userData.name,
+      email: userData.email,
+      role: userData.role || "Member",
+      profileImage: userData.profileImage || "",
+    },
+    auth: {
       passwordHash,
-    });
+    },
+  });
 
-    return { id: newUser.id, ...newUser.profile };
-  },
+  await user.save();
 
-  async login({ email, password }) {
-    const user = await AuthModel.findByEmail(email);
-    if (!user) throw new Error("Invalid email or password");
+  const token = generateToken({ id: user._id });
+  user.auth.jwtToken = token;
+  await user.save();
 
-    const isValid = await comparePassword(password, user.auth.passwordHash);
-    if (!isValid) throw new Error("Invalid email or password");
+  return { user, token };
+};
 
-    const tokens = generateTokens(user.id, user.profile.role);
+export const loginUser = async ({ email, password }) => {
+  const user = await AuthUser.findOne({ "profile.email": email });
+  if (!user) throw new Error("User not found");
 
-    return { ...tokens, user: { id: user.id, ...user.profile } };
-  },
+  const isValid = await comparePassword(password, user.auth.passwordHash);
+  if (!isValid) throw new Error("Invalid password");
 
-  async refresh(token) {
-    try {
-      const decoded = verifyRefreshToken(token);
-      const tokens = generateTokens(decoded.id, decoded.role);
-      return { accessToken: tokens.accessToken };
-    } catch {
-      throw new Error("Invalid refresh token");
-    }
-  },
+  const token = generateToken({ id: user._id });
+  user.auth.jwtToken = token;
+  await user.save();
+
+  return { user, token };
+};
+
+export const getProfile = async (userId) => {
+  const user = await AuthUser.findById(userId).select("-auth.passwordHash");
+  if (!user) throw new Error("User not found");
+  return user;
 };

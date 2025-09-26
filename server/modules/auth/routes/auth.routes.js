@@ -1,12 +1,11 @@
-import { Router } from "express";
-import { AuthController } from "../controllers/auth.controller.js";
-import { authRateLimiter } from "../../../middlewares/rateLimiter.middleware.js";
+import express from "express";
+import * as authController from "../controllers/auth.controller.js";
+import { authMiddleware } from "../../../middlewares/auth.middleware.js";
 
-const router = Router();
+const router = express.Router();
 
-// Apply login/register rate limiter
-router.post("/register", authRateLimiter, AuthController.register);
-router.post("/login", authRateLimiter, AuthController.login);
-router.post("/refresh", AuthController.refresh);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.get("/profile", authMiddleware, authController.profile);
 
 export default router;

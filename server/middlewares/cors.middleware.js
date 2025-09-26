@@ -1,6 +1,12 @@
-import cors from "cors";
-
-export const corsMiddleware = cors({
-  origin: "*", // replace with your frontend URL
-  credentials: true, // allow sending cookies or auth headers
-});
+export const corsMiddleware = (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
+  next();
+};
