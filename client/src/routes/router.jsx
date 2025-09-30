@@ -44,9 +44,9 @@ export default function AppRouter() {
         {/* Protected App Routes */}
         <Route
           element={
-            <ProtectedRoute>
-              <AppLayout />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <AppLayout />
+            // </ProtectedRoute>
           }
         >
           <Route index element={<DashboardPage />} />
